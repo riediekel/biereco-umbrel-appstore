@@ -1,0 +1,40 @@
+manifestVersion: 1
+id: biereco-spotweb
+storage:
+  dataRoot: data
+name: Spotweb
+tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
+category: media
+version: "2026.10.21"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
+port: 8083
+description: >-
+  📚 Spotweb is one of the most-featured Spotnet clients currently available, featuring among other things:
+  Fast.
+  Customizable filter system from within the system.
+  Posting of comments and spots.
+  Showing and filtering on new spots since the last view.
+  Watchlist.
+  Easy to download multiple files.
+  Rating of spots.
+  Both central as user-specific blacklist support built-in.
+  Spam reporting.
+  Easy layout customization by providing custom CSS.
+  Growl/Notify My Android/Notify/Prowl and Twitter integration. (*)
+  Spot statistics on your system.
+  Sabnzbd and nzbget(*) integration.
+
+developer: Spotweb
+website: https://github.com/jgeusebroek/docker-spotweb
+submitter: biereco
+repo: https://github.com/jgeusebroek/docker-spotweb
+releaseNotes: >-
+  This update moves to the latest image build (tag 20261021) and pins the MariaDB database to stable version 13.0.2 instead of `:latest`.
+#gallery:
+#  - 1.jpg
+#  - 2.jpg
+#  - 3.jpg
+defaultUsername: ""
+defaultPassword: ""
+dependencies: []
+path: ""

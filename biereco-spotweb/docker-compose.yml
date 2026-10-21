@@ -1,0 +1,46 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: biereco_spotweb_1
+      APP_PORT: 8083
+  spotweb:
+    image: jgeusebroek/spotweb:20261021
+#    network_mode: host
+    container_name: biereco_spotweb_1
+    restart: unless-stopped
+    environment:
+#      - PUID=1030
+#      - GUID=100
+      - TZ=Europe/Amsterdam
+      - SPOTWEB_DB_TYPE=pdo_mysql
+      - SPOTWEB_DB_HOST=spotweb_db
+      - SPOTWEB_DB_PORT=3306
+      - SPOTWEB_DB_NAME=spotweb
+      - SPOTWEB_DB_USER=spotweb
+      - SPOTWEB_DB_PASS=spotweb
+      - SPOTWEB_CRON_RETRIEVE=* */2 * * *
+    depends_on:
+      - spotweb_db
+    ports:
+      - 8083:80
+    volumes:
+      - ${APP_DATA_DIR}/data/app_data/config:/config
+
+  spotweb_db:
+    image: library/mariadb:13.0.2
+    container_name: spotweb_db
+    restart: unless-stopped
+#    networks:
+#      - intern
+    environment:
+      - PUID=1030
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=spotweb
+      - TZ=Europe/Amsterdam
+      - MYSQL_DATABASE=spotweb
+      - MYSQL_USER=spotweb
+      - MYSQL_PASSWORD=spotweb
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/config
+#    ports:
+#     - 3306:3306
