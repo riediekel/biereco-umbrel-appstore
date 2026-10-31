@@ -23,8 +23,7 @@ services:
       - SPOTWEB_DB_PASS=spotweb
       - SPOTWEB_CRON_RETRIEVE=* */2 * * *
     depends_on:
-      spotweb_db:
-        condition: service_healthy
+      - spotweb_db
     ports:
       - 8083:80
     volumes:
@@ -51,13 +50,10 @@ services:
       - MYSQL_DATABASE=spotweb
       - MYSQL_USER=spotweb
       - MYSQL_PASSWORD=spotweb
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      interval: 5s
-      timeout: 5s
-      retries: 30
-      start_period: 30s
     volumes:
       - ${APP_DATA_DIR}/data/db:/var/lib/mysql
 #    ports:
 #     - 3306:3306
+# No healthcheck on purpose: databases created by older versions of this app
+# have no `healthcheck` user, which makes healthcheck.sh report "unhealthy"
+# forever. The spotweb entrypoint already waits for the database itself.

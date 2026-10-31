@@ -5,11 +5,11 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.11.04"
+version: "2026.11.05"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: |-
-  📚 Spotweb is one of the most-featured Spotnet clients currently available, featuring among other things:
+  ?? Spotweb is one of the most-featured Spotnet clients currently available, featuring among other things:
   Fast.
   Customizable filter system from within the system.
   Posting of comments and spots.
@@ -28,7 +28,7 @@ description: |-
 
   **Setup after installing**
 
-  1. Open **Settings → App Settings → Environment variables**.
+  1. Open **Settings ? App Settings ? Environment variables**.
   2. Fill in your Usenet server: `SPOTWEB_NNTP_HOST`, `SPOTWEB_NNTP_PORT` (563 for SSL/TLS, 119 for plain or STARTTLS), `SPOTWEB_NNTP_USER`, `SPOTWEB_NNTP_PASS` and `SPOTWEB_NNTP_ENCRYPTION`.
   3. Optionally set `SPOTWEB_ADMIN_USER` and `SPOTWEB_ADMIN_PASS` to choose the Spotweb administrator login.
   4. Save and wait for the app to restart (about 30 seconds), then open Spotweb and log in.
@@ -37,18 +37,18 @@ description: |-
 
   **Theme**
 
-  The app ships with a modern light/dark theme that is enabled automatically. Use the theme button in the top bar to switch between light, dark and auto. The layout adapts to smaller screens for tablets and narrow windows, and phones get a matching mobile layout. To return to the stock Spotweb look, clear the *Custom CSS* field under Settings → Custom CSS.
+  The app ships with a modern light/dark theme that is enabled automatically. Use the theme button in the top bar to switch between light, dark and auto. The layout adapts to smaller screens for tablets and narrow windows, and phones get a matching mobile layout. To return to the stock Spotweb look, clear the *Custom CSS* field under Settings ? Custom CSS.
 
 developer: Spotweb
 website: https://github.com/jgeusebroek/docker-spotweb
 submitter: biereco
 repo: https://github.com/jgeusebroek/docker-spotweb
 releaseNotes: >-
-  Makes the theme responsive: the top bar, sidebar and card grid adapt to
-  tablets and narrower browser windows, and wide table views scroll inside the
-  content pane instead of the whole page. Phones now get a matching mobile
-  layout with the same light and dark colours instead of the stock jQuery
-  Mobile look.
+  Fixes an upgrade problem where the app stayed stopped: the database
+  healthcheck added in the previous release could not pass on databases created
+  by older versions, so Spotweb never started. The healthcheck is gone and the
+  database volume is untouched, so existing spots and settings are kept. Also
+  includes the responsive theme, the mobile layout and full-width login fields.
 gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg
