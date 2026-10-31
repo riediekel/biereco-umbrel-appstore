@@ -9,8 +9,9 @@ services:
     container_name: biereco_spotweb_1
     restart: unless-stopped
     # Seed the Usenet server + admin credentials from the App Settings
-    # environment variables before starting the upstream entrypoint.
-    entrypoint: ["/bin/bash", "-c", "php /seed.php; exec /entrypoint.sh"]
+    # environment variables and copy the theme into the docroot before
+    # starting the upstream entrypoint.
+    entrypoint: ["/bin/bash", "/biereco-hooks/entrypoint.sh"]
     environment:
 #      - PUID=1030
 #      - GUID=100
@@ -28,13 +29,8 @@ services:
       - 8083:80
     volumes:
       - ${APP_DATA_DIR}/data/app_data/config:/config
-      - ${APP_DATA_DIR}/hooks/seed.php:/seed.php:ro
-      - ${APP_DATA_DIR}/hooks/theme.css:/var/www/spotweb/biereco-theme.css:ro
-      - ${APP_DATA_DIR}/hooks/mobile.css:/var/www/spotweb/biereco-mobile.css:ro
-      # Spotweb serves a separate jQuery-Mobile template to phones; override its
-      # header to load the mobile theme.
-      - ${APP_DATA_DIR}/hooks/mobile-header.inc.php:/var/www/spotweb/templates/mobile/header.inc.php:ro
-      - ${APP_DATA_DIR}/hooks/mobile-basic-header.inc.php:/var/www/spotweb/templates/mobile/includes/basic-html-header.inc.php:ro
+      # scripts + theme; copied into the docroot by entrypoint.sh
+      - ${APP_DATA_DIR}/hooks:/biereco-hooks:ro
 
   spotweb_db:
     image: library/mariadb:13.0.2
