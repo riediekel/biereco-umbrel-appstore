@@ -8,7 +8,7 @@ category: media
 version: "2026.10.31"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
-description: >-
+description: |-
   📚 Spotweb is one of the most-featured Spotnet clients currently available, featuring among other things:
   Fast.
   Customizable filter system from within the system.
@@ -24,9 +24,16 @@ description: >-
   Spot statistics on your system.
   Sabnzbd and nzbget(*) integration.
 
-  After installing you can set your Usenet server and Spotweb admin credentials under
-  Settings → App Settings → Environment variables, or leave them empty and configure
-  everything in Spotweb itself.
+  There is no configuration step while installing: Spotweb installs with its defaults and you set everything up afterwards.
+
+  **Setup after installing**
+
+  1. Open **Settings → App Settings → Environment variables**.
+  2. Fill in your Usenet server: `SPOTWEB_NNTP_HOST`, `SPOTWEB_NNTP_PORT` (563 for SSL/TLS, 119 for plain or STARTTLS), `SPOTWEB_NNTP_USER`, `SPOTWEB_NNTP_PASS` and `SPOTWEB_NNTP_ENCRYPTION`.
+  3. Optionally set `SPOTWEB_ADMIN_USER` and `SPOTWEB_ADMIN_PASS` to choose the Spotweb administrator login.
+  4. Save and wait for the app to restart (about 30 seconds), then open Spotweb and log in.
+
+  The values are applied on start-up and only reapplied when you change them, so settings you edit later inside Spotweb are kept. Leave them empty to configure Spotweb itself instead; the default login is admin/admin.
 
 developer: Spotweb
 website: https://github.com/jgeusebroek/docker-spotweb
@@ -37,10 +44,10 @@ releaseNotes: >-
   Settings → App Settings → Environment variables, without opening the Spotweb
   installer. The MariaDB data directory is now persisted correctly, so the
   database survives app restarts and updates.
-#gallery:
-#  - 1.jpg
-#  - 2.jpg
-#  - 3.jpg
+gallery:
+  - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
+  - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg
+  - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/3.jpg
 environment:
   - name: SPOTWEB_NNTP_HOST
     services:
