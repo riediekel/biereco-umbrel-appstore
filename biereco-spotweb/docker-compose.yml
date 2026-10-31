@@ -31,6 +31,11 @@ services:
       - ${APP_DATA_DIR}/data/app_data/config:/config
       - ${APP_DATA_DIR}/hooks/seed.php:/seed.php:ro
       - ${APP_DATA_DIR}/hooks/theme.css:/var/www/spotweb/biereco-theme.css:ro
+      - ${APP_DATA_DIR}/hooks/mobile.css:/var/www/spotweb/biereco-mobile.css:ro
+      # Spotweb serves a separate jQuery-Mobile template to phones; override its
+      # header to load the mobile theme.
+      - ${APP_DATA_DIR}/hooks/mobile-header.inc.php:/var/www/spotweb/templates/mobile/header.inc.php:ro
+      - ${APP_DATA_DIR}/hooks/mobile-basic-header.inc.php:/var/www/spotweb/templates/mobile/includes/basic-html-header.inc.php:ro
 
   spotweb_db:
     image: library/mariadb:13.0.2

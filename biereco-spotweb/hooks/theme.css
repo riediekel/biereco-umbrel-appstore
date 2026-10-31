@@ -1024,3 +1024,67 @@ html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a:hover {
   border-color: transparent !important;
   color: var(--a) !important;
 }
+
+/* --------------------------------------------------------------------------
+   Responsive: tablets and narrow desktop windows
+   Phones are served by Spotweb's separate `mobile` template, which is themed
+   by biereco-mobile.css instead.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1180px) {
+  :root { --sw-sidebar-w: 208px; }
+
+  div.spots { padding: 16px 16px 36px; }
+
+  .cardsGrid {
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+  }
+
+  div#toolbar form div.search { width: 196px; }
+}
+
+@media (max-width: 980px) {
+  :root { --sw-sidebar-w: 188px; }
+
+  div#toolbar { gap: 4px; padding: 0 10px; }
+  div#toolbar::before { padding-left: 20px; font-size: 14px; }
+  div#toolbar .toolbarButton p { height: 32px !important; padding: 0 10px !important; }
+  div#toolbar .toolbarButton p a { font-size: 12.5px; }
+  div#toolbar form { margin: 0 !important; }
+  div#toolbar form div.search { width: 172px; height: 34px; }
+
+  div.spots { padding: 14px 12px 32px; }
+  .cardsGrid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+
+  div#filter ul.filterlist li a.filter,
+  div#filter ul.filterlist.quicklinks li a {
+    font-size: 12.5px !important;
+    padding: 5px 8px !important;
+  }
+
+  /* keep the wide table inside the content pane instead of the page */
+  div.spots:has(> table.spots) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  div.spots > table.spots { min-width: 780px; }
+}
+
+@media (max-width: 800px) {
+  :root { --sw-sidebar-w: 168px; }
+
+  div#toolbar::before { content: ""; width: 18px; padding: 0; }
+  div#toolbar .toolbarButton p { padding: 0 8px !important; }
+  div#toolbar form div.search { width: 150px; }
+
+  div#filter a.viewState h4 { margin: 14px 10px 4px !important; font-size: 10px !important; }
+  div#filter ul.filterlist { padding: 0 8px !important; }
+  div#filter ul.filterlist.subfilterlist { margin-left: 8px !important; padding-left: 6px !important; }
+  div#filter ul.filterlist li a.filter { gap: 5px; }
+  div#filter .spoticon { transform: scale(.9); }
+
+  .cardsGrid { gap: 10px; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); }
+  .spotCard .title a { font-size: 12.5px; }
+}

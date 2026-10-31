@@ -5,7 +5,7 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.11.02"
+version: "2026.11.03"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: |-
@@ -37,18 +37,18 @@ description: |-
 
   **Theme**
 
-  The app ships with a modern light/dark theme that is enabled automatically. Use the theme button in the top bar to switch between light, dark and auto. To return to the stock Spotweb look, clear the *Custom CSS* field under Settings → Custom CSS.
+  The app ships with a modern light/dark theme that is enabled automatically. Use the theme button in the top bar to switch between light, dark and auto. The layout adapts to smaller screens for tablets and narrow windows, and phones get a matching mobile layout. To return to the stock Spotweb look, clear the *Custom CSS* field under Settings → Custom CSS.
 
 developer: Spotweb
 website: https://github.com/jgeusebroek/docker-spotweb
 submitter: biereco
 repo: https://github.com/jgeusebroek/docker-spotweb
 releaseNotes: >-
-  Adds a modern light/dark theme for Spotweb with a refreshed top bar, sidebar,
-  card grid, table view and spot detail page. Switch between light, dark and
-  auto with the button in the top bar. The theme is applied automatically and
-  is not affected by the 10 KB custom CSS limit, so you can still use the
-  Custom CSS field for your own tweaks.
+  Makes the theme responsive: the top bar, sidebar and card grid adapt to
+  tablets and narrower browser windows, and wide table views scroll inside the
+  content pane instead of the whole page. Phones now get a matching mobile
+  layout with the same light and dark colours instead of the stock jQuery
+  Mobile look.
 gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg

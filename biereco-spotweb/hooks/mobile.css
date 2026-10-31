@@ -1,0 +1,522 @@
+/* ==========================================================================
+   Biereco Spotweb theme — mobile template (jQuery Mobile 1.4.5)
+   Loaded from the overridden templates/mobile/header.inc.php, so it applies
+   to phones where Spotweb serves the `mobile` template instead of `modern`.
+   ========================================================================== */
+
+:root {
+  --mb-bg: #f5f6f8;
+  --mb-surface: #ffffff;
+  --mb-surface-2: #eff1f5;
+  --mb-border: #e4e7ec;
+  --mb-text: #111827;
+  --mb-muted: #6b7280;
+  --mb-accent: #4f46e5;
+  --mb-accent-soft: #eef2ff;
+  --mb-pill-fg: #4338ca;
+  --mb-radius: 12px;
+  --mb-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mb-bg: #0f1216;
+    --mb-surface: #14171c;
+    --mb-surface-2: #1b2027;
+    --mb-border: #252b34;
+    --mb-text: #eef1f4;
+    --mb-muted: #9aa4b2;
+    --mb-accent: #818cf8;
+    --mb-accent-soft: rgba(99, 102, 241, .2);
+    --mb-pill-fg: #c7d2fe;
+    --mb-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Page shell
+   -------------------------------------------------------------------------- */
+
+html,
+body {
+  background: var(--mb-bg) !important;
+  color: var(--mb-text);
+}
+
+body,
+.ui-mobile-viewport,
+.ui-page,
+.ui-page-theme-a,
+.ui-overlay-a {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  text-shadow: none !important;
+}
+
+.ui-page,
+.ui-page-theme-a,
+.ui-overlay-a,
+.ui-mobile-viewport,
+div[data-role="page"] {
+  background: var(--mb-bg) !important;
+  background-image: none !important;
+  color: var(--mb-text) !important;
+}
+
+div[data-role="content"] {
+  background: transparent !important;
+  padding: 12px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+div[data-role="header"] {
+  background: var(--mb-surface) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--mb-border) !important;
+  box-shadow: var(--mb-shadow) !important;
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+  padding: 4px 0 6px !important;
+}
+
+div[data-role="header"] h1,
+.ui-title {
+  margin: .5em 15% !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -.01em;
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+}
+
+div[data-role="header"] a.ui-btn {
+  background: var(--mb-surface-2) !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  margin: 4px 6px !important;
+}
+
+div[data-role="header"] a.ui-btn:hover,
+div[data-role="header"] a.ui-btn:focus {
+  background: var(--mb-surface) !important;
+  border-color: var(--mb-border) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Navbar (Spots / Search / Filters / ...)
+   -------------------------------------------------------------------------- */
+
+div[data-role="navbar"] {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+div[data-role="navbar"] ul {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 6px !important;
+}
+
+div[data-role="navbar"] ul li {
+  border: 0 !important;
+}
+
+div[data-role="navbar"] ul li a.ui-btn {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--mb-muted) !important;
+  text-shadow: none !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  padding-top: 5px !important;
+}
+
+div[data-role="navbar"] ul li a.ui-btn-active,
+div[data-role="navbar"] ul li a.ui-btn-active:hover {
+  background: var(--mb-accent-soft) !important;
+  border-radius: 9px !important;
+  color: var(--mb-pill-fg) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+
+.ui-btn {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  font-family: inherit !important;
+}
+
+a.ui-btn,
+input.ui-btn,
+button.ui-btn,
+.ui-btn.ui-btn-a,
+.ui-btn.ui-btn-b,
+.ui-btn.ui-btn-c,
+.ui-btn.ui-btn-d,
+.ui-btn.ui-btn-e {
+  background: var(--mb-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--mb-border) !important;
+  border-radius: 10px !important;
+  color: var(--mb-text) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.ui-btn-active,
+a.ui-btn-active,
+.ui-btn.ui-btn-active {
+  background: var(--mb-accent) !important;
+  background-image: none !important;
+  border-color: var(--mb-accent) !important;
+  color: #ffffff !important;
+}
+
+/* jQM ships white icon sprites; invert them where the surface is light */
+.ui-btn::after {
+  filter: invert(.45) saturate(0);
+}
+
+.ui-btn-active::after {
+  filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ui-btn::after {
+    filter: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   List views (spots, filters)
+   -------------------------------------------------------------------------- */
+
+ul[data-role="listview"] {
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+ul[data-role="listview"] > li {
+  margin: 8px 0 !important;
+  border: 1px solid var(--mb-border) !important;
+  border-radius: var(--mb-radius) !important;
+  background: var(--mb-surface) !important;
+  box-shadow: var(--mb-shadow) !important;
+  overflow: hidden;
+}
+
+ul[data-role="listview"] > li > a {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+  padding: 11px 12px !important;
+}
+
+ul[data-role="listview"] > li > a.ui-btn-active {
+  background: var(--mb-accent-soft) !important;
+  color: var(--mb-pill-fg) !important;
+}
+
+ul[data-role="listview"] h3,
+ul[data-role="listview"] .ui-li-heading {
+  margin: 0 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  white-space: normal !important;
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+}
+
+ul[data-role="listview"] p,
+ul[data-role="listview"] .ui-li-desc {
+  margin: 4px 0 0 !important;
+  font-size: 11px !important;
+  color: var(--mb-muted) !important;
+  white-space: normal !important;
+  text-shadow: none !important;
+}
+
+ul[data-role="listview"] li img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+}
+
+ul[data-role="listview"] .ui-li-icon {
+  max-width: 20px !important;
+  height: 20px !important;
+  border-radius: 4px;
+}
+
+/* nested filter lists */
+ul[data-role="listview"] li ul {
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+ul[data-role="listview"] li ul li {
+  margin: 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--mb-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  background: var(--mb-surface-2) !important;
+  border: 1px solid var(--mb-border) !important;
+  border-radius: 10px !important;
+  color: var(--mb-text) !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  text-shadow: none !important;
+}
+
+.ui-input-search {
+  border-radius: 10px !important;
+  background: var(--mb-surface-2) !important;
+  border-color: var(--mb-border) !important;
+}
+
+.ui-input-search input {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.ui-input-search .ui-input-clear {
+  filter: invert(.45);
+}
+
+.ui-field-contain,
+div[data-role="fieldcontain"] {
+  border: 0 !important;
+  padding: 8px 0 !important;
+}
+
+.ui-controlgroup {
+  border-radius: 10px !important;
+}
+
+.ui-controlgroup-horizontal .ui-btn {
+  border-radius: 0 !important;
+}
+
+.ui-controlgroup-horizontal .ui-first-child {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.ui-controlgroup-horizontal .ui-last-child {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+.ui-grid-a .ui-block-a a.ui-btn {
+  border-radius: 10px 4px 4px 10px !important;
+}
+
+.ui-grid-a .ui-block-b a.ui-btn {
+  border-radius: 4px 10px 10px 4px !important;
+}
+
+label {
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+  font-size: 13px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Spot detail
+   -------------------------------------------------------------------------- */
+
+img.spotinfoimage {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  margin: 0 auto 12px;
+  border-radius: var(--mb-radius);
+  box-shadow: var(--mb-shadow);
+}
+
+div[data-role="content"] h3 {
+  margin: 0 0 12px;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  color: var(--mb-text) !important;
+  text-shadow: none !important;
+  white-space: normal !important;
+}
+
+div[data-role="content"] h4 {
+  margin: 18px 0 8px;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--mb-muted) !important;
+  text-shadow: none !important;
+}
+
+div[data-role="content"] p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mb-text);
+}
+
+table.spotinfo {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.spotinfo th {
+  width: 96px;
+  padding: 7px 8px 7px 0;
+  text-align: left;
+  vertical-align: top;
+  font-size: 11px !important;
+  font-weight: 600;
+  color: var(--mb-muted) !important;
+}
+
+table.spotinfo td {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--mb-border);
+  font-size: 12.5px;
+  color: var(--mb-text);
+}
+
+table.spotinfo a {
+  color: var(--mb-accent) !important;
+  text-decoration: none;
+}
+
+table.spotinfo tr:last-child td {
+  border-bottom: 0;
+}
+
+/* collapsible comment block */
+div[data-role="collapsible"] {
+  margin-top: 14px !important;
+  border: 1px solid var(--mb-border) !important;
+  border-radius: var(--mb-radius) !important;
+  background: var(--mb-surface) !important;
+  overflow: hidden;
+}
+
+div[data-role="collapsible"] > h4 {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+  letter-spacing: .02em !important;
+  text-transform: none !important;
+  color: var(--mb-text) !important;
+}
+
+div[data-role="collapsible"] h4 a.ui-btn {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--mb-text) !important;
+  text-align: left !important;
+  padding-left: 14px !important;
+}
+
+div[data-role="collapsible"] ul[data-role="listview"] > li {
+  margin: 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--mb-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 12.5px;
+  color: var(--mb-text);
+  padding: 10px 12px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Popups / dialogs
+   -------------------------------------------------------------------------- */
+
+.ui-popup,
+.ui-popup-container,
+.ui-dialog,
+.ui-popup .ui-content {
+  background: var(--mb-surface) !important;
+  color: var(--mb-text) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .28) !important;
+}
+
+.ui-popup h3,
+.ui-dialog h3 {
+  color: var(--mb-text) !important;
+}
+
+.ui-overlay-a {
+  background: rgba(15, 23, 42, .55) !important;
+  opacity: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Basic (login / permission denied) pages
+   -------------------------------------------------------------------------- */
+
+div.container {
+  font: 13px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  color: var(--mb-text);
+  padding: 12px;
+}
+
+div.permdenied {
+  margin: 12px 0 !important;
+  border: 1px solid #fecaca !important;
+  border-radius: 12px !important;
+  background: #fef2f2 !important;
+  color: #991b1b !important;
+  padding: 10px;
+}
+
+div.login {
+  margin-top: 18px;
+}
+
+ul.formerrors {
+  border-radius: 10px;
+  background: #fef2f2;
+}
+
+@media (prefers-color-scheme: dark) {
+  div.permdenied {
+    border-color: rgba(239, 68, 68, .35) !important;
+    background: rgba(239, 68, 68, .12) !important;
+    color: #fca5a5 !important;
+  }
+
+  ul.formerrors {
+    background: rgba(239, 68, 68, .12);
+  }
+}
