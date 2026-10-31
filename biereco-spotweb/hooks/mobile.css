@@ -504,6 +504,27 @@ div.login {
   margin-top: 18px;
 }
 
+/* login / create user forms: fill the phone width instead of the HTML size= */
+div.container form input[type="text"],
+div.container form input[type="password"],
+div.container form input[type="email"] {
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 9px 10px;
+}
+
+div.container form input[type="submit"] {
+  width: 100% !important;
+  padding: 11px 10px;
+  border: 1px solid var(--mb-accent) !important;
+  border-radius: 10px !important;
+  background: var(--mb-accent) !important;
+  color: #ffffff !important;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 ul.formerrors {
   border-radius: 10px;
   background: #fef2f2;

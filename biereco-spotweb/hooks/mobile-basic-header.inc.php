@@ -47,7 +47,7 @@
 			<?php echo $settings->get('customcss'); ?>
 		</style>
 		<!-- Biereco theme for the mobile template (mounted from the app data dir) -->
-		<link rel='stylesheet' type='text/css' href='biereco-mobile.css'>
+		<link rel='stylesheet' type='text/css' href='biereco-mobile.css<?php $mbTheme = __DIR__ . '/../../../biereco-mobile.css'; echo is_file($mbTheme) ? '?v=' . filemtime($mbTheme) : ''; ?>'>
 		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 		<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 	</head>
