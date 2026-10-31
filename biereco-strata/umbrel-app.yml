@@ -1,0 +1,108 @@
+manifestVersion: 1
+id: biereco-strata
+storage:
+  dataRoot: data
+name: Strata
+tagline: Run a local LLM server on your own GPU, with an OpenAI and Anthropic compatible API.
+category: ai
+version: "0.2.9"
+icon: https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/icon.png
+port: 8091
+description: |-
+  Strata is a local large language model server. It loads a model onto your graphics card and serves it through an API that works with many coding and chat apps.
+
+  **What you get**
+
+  - OpenAI-compatible API at `/v1` and Anthropic-compatible API for apps such as Claude Code.
+  - Chat and tool calling.
+  - Automatic model choice for your card, or pick a model size yourself.
+  - A key-protected API. The key is your Umbrel app password.
+
+  **Requirements**
+
+  - A computer with an NVIDIA RTX 20, 30, 40 or 50 series card (or a matching RTX A or Quadro card) and an NVIDIA driver 580 or newer.
+  - The NVIDIA Container Toolkit installed on the Umbrel host.
+  - Plenty of disk space. The first start downloads the model, which can be tens of GB.
+  - Lots of RAM. Strata loads the model into memory, so do not run other memory-heavy apps at the same time.
+
+  Strata does not run on Raspberry Pi or other ARM devices, and it cannot use AMD or Intel graphics cards in this app.
+
+  **After installing**
+
+  1. Wait for the first start to finish. The download and setup can take a long time. Open the app logs to follow progress.
+  2. Open Strata and use the API key (your app password) to connect.
+  3. Point your apps at the API address and use the key as the API key.
+
+  **Settings**
+
+  - `MODEL`: model size such as `IQ3_XXS` or `IQ3_S`. Leave empty and Strata picks one for your card.
+  - `CONTEXT`: how much text the model remembers at once, for example `32k`, `64k`, `128k`. Default `32k`.
+  - `PARALLEL`: requests answered at the same time, 1 to 8. Leave empty to fit it to the card.
+  - `VISION`: `off` or `on`. With `on` the model can read pictures; a reader file of about 0.9 GB is downloaded.
+  - `TUNE`: `skip`, `quick` or `thorough`. Tuning runs once and is kept.
+  - `GPUS`: which graphics cards to use, for example `0` or `0,1`. Leave empty to use all that fit.
+  - `STRATA_MEMORY_LIMIT_MIB`: the most RAM Strata may use, in MiB (for example `65536` for 64 GiB). `0` means no limit.
+
+  Changing a setting restarts Strata. The model and tuning results stay on disk.
+developer: Niko1221
+website: https://github.com/Niko1221/Strata
+submitter: biereco
+repo: https://github.com/Niko1221/Strata
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+releaseNotes: >-
+  Strata 0.2.9: Unsloth's 1-bit DeepSeek sets, faster prompts on Strix Halo,
+  faster parallel requests on Linux NVIDIA cards, and fixes from user reports.
+  This app runs the cuda13 container image for NVIDIA RTX cards.
+environment:
+  - name: MODEL
+    services:
+      - strata
+    default: ""
+    note: Model size, for example IQ3_XXS or IQ3_S. Leave empty and Strata picks a model for your card.
+  - name: CONTEXT
+    services:
+      - strata
+    default: "32k"
+    options:
+      - 32k
+      - 64k
+      - 128k
+      - 256k
+    note: How much text the model remembers at once.
+  - name: PARALLEL
+    services:
+      - strata
+    default: ""
+    note: Requests answered at the same time, 1 to 8. Leave empty to fit it to the card.
+  - name: VISION
+    services:
+      - strata
+    default: "off"
+    options:
+      - off
+      - on
+    note: Let the model read pictures. Downloads a reader file of about 0.9 GB.
+  - name: TUNE
+    services:
+      - strata
+    default: "skip"
+    options:
+      - skip
+      - quick
+      - thorough
+    note: Tune the engine for your card. Runs once and is kept. Quick can take up to about 20 minutes.
+  - name: GPUS
+    services:
+      - strata
+    default: ""
+    note: Graphics cards to use, for example 0 or 0,1. Leave empty to use all that fit.
+  - name: STRATA_MEMORY_LIMIT_MIB
+    services:
+      - strata
+    default: "0"
+    note: The most RAM Strata may use, in MiB (65536 = 64 GiB). 0 means no limit. Strata's memory guard works against this value.
+dependencies: []
+path: ""
