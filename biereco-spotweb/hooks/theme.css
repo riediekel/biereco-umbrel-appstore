@@ -1,0 +1,984 @@
+/* ==========================================================================
+   Biereco Spotweb theme — "Aurora"
+   Loaded as an external stylesheet (see hooks/seed.php), so it is not bound
+   to the 10 KB limit of Spotweb's customcss setting.
+   ========================================================================== */
+
+:root {
+  --color-bg: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-surface-2: #eff1f5;
+  --color-border: #e4e7ec;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-accent: #4f46e5;
+
+  --sw-sidebar-w: 236px;
+  --sw-gap: 0px;
+  --sw-toolbar-h: 56px;
+  --sw-radius: 14px;
+  --sw-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06);
+  --sw-shadow-lg: 0 14px 32px -12px rgba(16, 24, 40, .28);
+
+  /* short aliases, used all over the rules below */
+  --t: var(--color-text);
+  --m: var(--color-muted);
+  --b: var(--color-border);
+  --a: var(--color-accent);
+  --s: var(--color-surface);
+  --s2: var(--color-surface-2);
+
+  --bar: rgba(255, 255, 255, .86);
+  --bar-border: var(--color-border);
+  --btn: var(--color-surface-2);
+  --btn-hover: var(--color-surface);
+  --thumb: linear-gradient(135deg, #eef1f7, #dde3ee);
+  --panel: var(--color-surface-2);
+  --pill: #eef2ff;
+  --pill-fg: #4338ca;
+
+  /* category colours: --cb background, --cf foreground */
+  --c0: #e0e7ff; --c0t: #3730a3;
+  --c1: #fef3c7; --c1t: #92400e;
+  --c2: #d1fae5; --c2t: #065f46;
+  --c3: #fee2e2; --c3t: #991b1b;
+  --c4: #ede9fe; --c4t: #5b21b6;
+}
+
+html[data-theme="dark"] {
+  --bar: rgba(17, 20, 25, .86);
+  --bar-border: #252b34;
+  --btn: rgba(255, 255, 255, .06);
+  --btn-hover: rgba(255, 255, 255, .1);
+  --thumb: linear-gradient(135deg, #1b2027, #14181e);
+  --panel: rgba(255, 255, 255, .04);
+  --pill: rgba(99, 102, 241, .18);
+  --pill-fg: #c7d2fe;
+  --c0: rgba(99, 102, 241, .2); --c0t: #c7d2fe;
+  --c1: rgba(245, 158, 11, .18); --c1t: #fcd34d;
+  --c2: rgba(16, 185, 129, .18); --c2t: #6ee7b7;
+  --c3: rgba(239, 68, 68, .18); --c3t: #fca5a5;
+  --c4: rgba(168, 85, 247, .2); --c4t: #d8b4fe;
+}
+
+html { background: var(--color-bg); }
+body.fixed { padding-top: var(--sw-toolbar-h); }
+
+.spotcat0 { --cb: var(--c0); --cf: var(--c0t); }
+.spotcat1 { --cb: var(--c1); --cf: var(--c1t); }
+.spotcat2 { --cb: var(--c2); --cf: var(--c2t); }
+.spotcat3 { --cb: var(--c3); --cf: var(--c3t); }
+.spotcat4 { --cb: var(--c4); --cf: var(--c4t); }
+
+/* --------------------------------------------------------------------------
+   Top bar
+   -------------------------------------------------------------------------- */
+
+div#toolbar {
+  height: var(--sw-toolbar-h);
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  box-sizing: border-box;
+  background: var(--bar);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--bar-border);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .04);
+}
+
+div#toolbar::before {
+  content: "Spotweb";
+  margin-right: auto;
+  padding-left: 22px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--t);
+  background: radial-gradient(circle at 7px 50%, var(--a) 0 5px, transparent 5.5px) no-repeat;
+}
+
+div#toolbar .toolbarButton { float: none; margin: 0 !important; }
+
+div#toolbar .toolbarButton p {
+  width: auto !important;
+  min-width: 0 !important;
+  height: 34px !important;
+  padding: 0 13px !important;
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--btn) !important;
+  border: 1px solid transparent !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  transition: background .16s ease, border-color .16s ease;
+}
+
+div#toolbar .toolbarButton p:hover {
+  background: var(--btn-hover) !important;
+  border-color: var(--b) !important;
+}
+
+div#toolbar .toolbarButton p a {
+  color: var(--t) !important;
+  text-shadow: none !important;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+div#toolbar .toolbarButton.dropdown ul ul {
+  left: auto !important;
+  right: 0;
+  min-width: 196px;
+  padding: 6px !important;
+  background: var(--s) !important;
+  border: 1px solid var(--b) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--sw-shadow-lg) !important;
+}
+
+div#toolbar .toolbarButton.dropdown ul ul li a {
+  color: var(--t) !important;
+  border-radius: 7px;
+  padding: 8px 10px !important;
+  font-size: 13px;
+}
+
+div#toolbar .toolbarButton.dropdown ul ul li a:hover {
+  background: var(--s2) !important;
+}
+
+div#toolbar span.scroll { display: none !important; }
+
+div#toolbar form {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  width: auto !important;
+  margin: 0 2px !important;
+  padding: 0 !important;
+}
+
+div#toolbar form div.search {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  width: 240px;
+  height: 36px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  background: var(--s2) !important;
+  background-image: none !important;
+  border: 1px solid var(--b) !important;
+  border-radius: 10px !important;
+  float: none !important;
+}
+
+div#toolbar form div.search:focus-within {
+  background: var(--s) !important;
+  border-color: var(--a) !important;
+}
+
+/* magnifier icon, drawn as a mask so it follows the text colour */
+div#toolbar form div.search::before {
+  content: "";
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  margin: 0 1px 0 7px;
+  background: currentColor;
+  color: var(--m);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") center / 15px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") center / 15px no-repeat;
+}
+
+div#toolbar form div.search input.searchbox {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto !important;
+  height: 30px !important;
+  padding: 0 8px !important;
+  background: none !important;
+  border: 0 !important;
+  color: var(--t) !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  text-shadow: none !important;
+  outline: none;
+}
+
+div#toolbar form div.search input.filtersubmit {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar
+   The bundled legacy stylesheet forces most of this with !important rules,
+   so the overrides below have to be !important with at least equal reach.
+   -------------------------------------------------------------------------- */
+
+div#filter {
+  width: var(--sw-sidebar-w);
+  padding: 6px 0 26px !important;
+  background: var(--s) !important;
+  background-image: none !important;
+  border-right: 1px solid var(--b);
+  box-sizing: border-box;
+  position: sticky;
+  top: var(--sw-toolbar-h);
+  max-height: calc(100vh - var(--sw-toolbar-h));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+div#filter a.viewState h4 {
+  height: auto !important;
+  line-height: 1 !important;
+  margin: 16px 14px 6px !important;
+  padding: 0 !important;
+  background: none !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--m) !important;
+  text-shadow: none !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .09em !important;
+  text-transform: uppercase !important;
+}
+
+div#filter a.viewState h4 span { top: 0 !important; right: 14px; opacity: .45; }
+
+div#filter ul.filterlist {
+  margin: 0 !important;
+  padding: 0 10px !important;
+  list-style: none !important;
+}
+
+div#filter ul.filterlist.subfilterlist {
+  margin: 0 0 0 14px !important;
+  padding: 0 0 0 8px !important;
+  border-left: 1px solid var(--b);
+}
+
+div#filter ul.filterlist li {
+  margin: 1px 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+div#filter ul.filterlist li a.filter {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px;
+  width: auto !important;
+  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 6px 9px !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: var(--t) !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  text-decoration: none !important;
+  transition: background .14s ease, color .14s ease;
+}
+
+div#filter ul.filterlist li a.filter:hover {
+  background: var(--s2) !important;
+  transform: none !important;
+}
+
+div#filter ul.filterlist li a.filter.selected {
+  background: var(--pill) !important;
+  color: var(--pill-fg) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+/* the little icon left of every filter name */
+div#filter .spoticon {
+  flex: 0 0 auto;
+  opacity: .8;
+  filter: grayscale(1);
+}
+
+div#filter a.filter:hover .spoticon,
+div#filter a.filter.selected .spoticon { opacity: 1; filter: none; }
+
+div#filter ul.filterlist li a.filter .newspots {
+  margin: 0 0 0 auto !important;
+  padding: 1px 7px !important;
+  order: 0;
+  border-radius: 999px !important;
+  background: var(--s2) !important;
+  background-image: none !important;
+  color: var(--m) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+
+div#filter ul.filterlist li a.filter:hover .newspots {
+  background: var(--pill) !important;
+  color: var(--pill-fg) !important;
+}
+
+div#filter ul.filterlist li span.toggle,
+div#filter ul.filterlist li span.inclusive {
+  flex: 0 0 auto;
+  float: none !important;
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: none !important;
+  background-image: none !important;
+  color: var(--m) !important;
+  font-size: 13px !important;
+  line-height: 18px !important;
+  text-align: center;
+  opacity: .55;
+}
+
+/* the legacy toggle is a sprite square; replace it with a plain chevron */
+div#filter ul.filterlist li span.toggle { font-size: 0 !important; }
+
+div#filter ul.filterlist li span.toggle::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E") center / 12px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E") center / 12px no-repeat;
+  transition: transform .15s ease;
+}
+
+div#filter ul.filterlist li span.toggle[title^="Expand"]::before { transform: rotate(-90deg); }
+
+div#filter ul.filterlist li span.toggle:hover,
+div#filter ul.filterlist li span.inclusive:hover {
+  opacity: 1;
+  background: var(--s2) !important;
+  color: var(--a) !important;
+}
+
+/* bottom maintenance block */
+div#filter ul.filterlist.maintenancebox {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px;
+  margin: 0 !important;
+  padding: 0 14px !important;
+}
+
+div#filter .maintenancebox li.info {
+  margin: 0 0 2px !important;
+  padding: 0 2px !important;
+  color: var(--m) !important;
+  font-size: 11.5px !important;
+}
+
+div#filter ul.filterlist.maintenancebox li a.greyButton {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 8px 12px !important;
+  box-sizing: border-box;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: var(--btn) !important;
+  color: var(--t) !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+}
+
+div#filter ul.filterlist.maintenancebox li a.greyButton:hover {
+  background: var(--a) !important;
+  color: #fff !important;
+}
+
+/* quick links: same pill treatment as the filter rows */
+div#filter ul.filterlist.quicklinks li a,
+html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 6px 9px !important;
+  box-sizing: border-box;
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: var(--t) !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  text-decoration: none !important;
+}
+
+div#filter ul.filterlist.quicklinks li a:hover,
+html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a:hover {
+  background: var(--s2) !important;
+  color: var(--a) !important;
+}
+
+div#filter ul.filterlist.quicklinks li img,
+div#filter ul.filterlist.quicklinks li .spoticon { opacity: .8; filter: grayscale(1); }
+
+/* --------------------------------------------------------------------------
+   Content + cards
+   -------------------------------------------------------------------------- */
+
+div.spots { padding: 20px 22px 40px; }
+
+.cardsGrid {
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 16px;
+}
+
+.spotCard {
+  position: relative;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border-radius: var(--sw-radius);
+  border: 1px solid var(--b);
+  background: var(--s);
+  box-shadow: var(--sw-shadow);
+  transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+}
+
+.spotCard:hover {
+  box-shadow: var(--sw-shadow-lg);
+  border-color: #d3d9e2;
+  transform: translateY(-2px);
+}
+
+.spotCard.new { border-color: var(--b); box-shadow: var(--sw-shadow); }
+
+.spotCard.new::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, .18);
+}
+
+.spotCard .thumb {
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--thumb);
+}
+
+.spotCard .thumb img {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+  transition: transform .4s ease;
+}
+
+.spotCard:hover .thumb img { transform: scale(1.045); }
+
+.spotCard .topRow { padding: 11px 13px 0; gap: 8px; align-items: flex-start; }
+
+.spotCard .topRow .badge {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: var(--cb);
+  color: var(--cf);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.spotCard .title { min-height: 2.7em; }
+
+.spotCard .title a {
+  color: var(--t);
+  font-size: 13.5px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -.005em;
+  transition: color .14s ease;
+}
+
+.spotCard:hover .title a { color: var(--a); }
+
+.spotCard .meta {
+  padding: 7px 13px 0;
+  gap: 2px 9px;
+  color: var(--m);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.spotCard .meta a { color: var(--m); text-decoration: none; }
+.spotCard .meta a:hover { color: var(--a); }
+
+.spotCard .actions { margin-top: auto; padding: 10px 13px 0; gap: 8px; }
+
+.spotCard .actions a.nzb,
+table.spots td.nzb a {
+  border: 0;
+  border-radius: 8px;
+  padding: 5px 11px;
+  background: var(--pill);
+  color: var(--pill-fg) !important;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-decoration: none;
+}
+
+.spotCard .actions a.nzb:hover,
+table.spots td.nzb a:hover { background: var(--a); color: #fff !important; }
+
+.spotCard .footerRow {
+  margin-top: 11px;
+  padding: 9px 13px;
+  border-top: 1px solid var(--b);
+  font-size: 11.5px;
+}
+
+.spotCard .comments { color: var(--m); font-weight: 500; }
+.spotCard .comments:hover { color: var(--a); }
+.spotCard .watch a { color: #c7cdd8; }
+.spotCard .watch a.add:hover,
+.spotCard .watch a.remove { color: #f59e0b; }
+
+input[type="checkbox"] {
+  accent-color: var(--a);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.cardsPager, .tablePager { gap: 10px; margin: 22px 0; }
+
+.cardsPager a, .tablePager a {
+  padding: 7px 16px;
+  border: 1px solid var(--b);
+  border-radius: 999px;
+  background: var(--s);
+  box-shadow: var(--sw-shadow);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.cardsPager a:hover, .tablePager a:hover { border-color: var(--a); color: var(--a); }
+
+.cardsNotice, .cardsEmptyState { border-radius: var(--sw-radius); box-shadow: var(--sw-shadow); }
+
+/* --------------------------------------------------------------------------
+   Table view
+   -------------------------------------------------------------------------- */
+
+table.spots { font-size: 12.5px; }
+
+table.spots tr { height: 34px; }
+table.spots tr.head { background: none !important; }
+
+table.spots tr.head th {
+  height: 38px;
+  padding: 0 9px;
+  background: var(--s) !important;
+  background-image: none !important;
+  border-bottom: 1px solid var(--b);
+  color: var(--m) !important;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-shadow: none;
+  white-space: nowrap;
+}
+
+table.spots tr.head th .sortby {
+  width: auto;
+  height: auto;
+  background: none !important;
+}
+
+table.spots tr.head th .sortby a {
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  background: none !important;
+  border: 3px solid transparent;
+}
+
+table.spots tr.head th .sortby a.up { border-bottom-color: #a6aebb; margin-bottom: 1px; }
+table.spots tr.head th .sortby a.down { border-top-color: #a6aebb; }
+
+table.spots td {
+  padding: 7px 9px;
+  border-bottom: 1px solid var(--b);
+  vertical-align: middle;
+}
+
+table.spots td a,
+table.spots td span,
+table.spots td label { height: auto; line-height: 1.4; }
+
+table.spots tr:hover td { background: var(--s2); }
+
+table.spots tr[class*="spotcat"] td { background: transparent !important; color: var(--t); }
+table.spots tr[class*="spotcat"] td a { color: var(--t); }
+
+table.spots td.category { width: 1% !important; min-width: 0 !important; padding: 4px 8px !important; text-align: center; white-space: nowrap; }
+
+table.spots td.category a {
+  display: inline-block;
+  width: auto !important;
+  min-width: 62px;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 6px;
+  background: var(--cb);
+  color: var(--cf) !important;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  text-decoration: none;
+  overflow: visible;
+}
+
+/* the empty download/edit columns carry sort arrows as well */
+table.spots tr.head th.multinzb .sortby,
+table.spots tr.head th.sabnzbd .sortby,
+table.spots tr.head th.editspot .sortby,
+table.spots tr.head th.watch .sortby { display: none !important; }
+
+table.spots td.watch a { background: none !important; width: 20px; height: 20px; }
+
+table.spots td.editspot .ui-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  overflow: visible;
+  background: none !important;
+  text-indent: 0;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+
+table.spots tr:hover td.editspot .ui-icon { opacity: .75; }
+
+table.spots td.editspot .ui-icon-pencil::before {
+  content: "\270E";
+  color: var(--m);
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Spot detail
+   -------------------------------------------------------------------------- */
+
+div.details { padding: 12px 14px 26px; }
+body.spotinfo-page div.details { max-width: 1500px; margin: 0 auto; padding-top: 16px; }
+
+div.announce {
+  padding: 7px 14px;
+  background: #ecfdf5 !important;
+  border-bottom: 1px solid #d1fae5;
+  color: #065f46 !important;
+  font-size: 12.5px;
+  text-align: center;
+}
+
+div.details table.spotheader {
+  padding: 6px 8px;
+  border: 1px solid var(--b);
+  border-radius: 12px;
+  background: var(--s);
+  box-shadow: var(--sw-shadow);
+}
+
+/* label/value table next to the image */
+div.details table.spotinfo {
+  border-collapse: separate !important;
+  border-spacing: 0 4px !important;
+}
+
+div.details table.spotinfo th {
+  width: 132px;
+  padding: 5px 10px !important;
+  border: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--m) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-align: right;
+  text-shadow: none !important;
+  white-space: nowrap;
+}
+
+div.details table.spotinfo td {
+  padding: 5px 10px !important;
+  border: 0 !important;
+  border-radius: 8px;
+  background: var(--s2) !important;
+  color: var(--t) !important;
+  font-size: 12.5px;
+}
+
+div.details table.spotinfo td a,
+div.details table.spotinfo td a:visited {
+  color: var(--a) !important;
+  text-decoration: none;
+}
+
+div.details table.spotinfo td a:hover { text-decoration: underline; }
+
+div.details div.description h4,
+div.details div.comments h4 {
+  margin: 20px 0 8px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: var(--s2) !important;
+  color: var(--m) !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+div.details div.comments li.nocomments {
+  border: 1px solid var(--b);
+  border-radius: 12px;
+  background: var(--s2) !important;
+  color: var(--m) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Config / preferences pages
+   -------------------------------------------------------------------------- */
+
+div#toolbar p a.toggle {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 15px;
+  border-radius: 10px;
+  background: var(--a);
+  color: #fff !important;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+div#toolbar p a.toggle:hover { filter: brightness(1.08); }
+
+body.modern-config .ui-tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+body.modern-config .ui-tabs-nav li {
+  float: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  border-radius: 9px;
+}
+
+body.modern-config .ui-tabs-nav li a {
+  display: block;
+  padding: 8px 14px !important;
+  border: 0 !important;
+  border-radius: 9px;
+  background: none !important;
+  color: var(--m) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body.modern-config .ui-tabs-nav li a:hover {
+  background: var(--s2) !important;
+  color: var(--t) !important;
+}
+
+body.modern-config .ui-tabs-nav li.ui-tabs-selected,
+body.modern-config .ui-tabs-nav li.ui-state-active { background: var(--pill) !important; }
+
+body.modern-config .ui-tabs-nav li.ui-tabs-selected a,
+body.modern-config .ui-tabs-nav li.ui-state-active a { color: var(--pill-fg) !important; }
+
+body.modern-config .ui-tabs-panel {
+  padding: 16px 4px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+}
+
+/* the legacy skin wraps the preference/settings forms in a white card with
+   a heavy shadow and repeats the grey panel background on the fieldset */
+body.modern-config form.edituserprefsform,
+body.modern-config form.editsettingsform,
+body.modern-config form.editspotform,
+body.modern-config form.edituserform {
+  padding: 18px !important;
+  border: 1px solid var(--b) !important;
+  border-radius: 16px !important;
+  background: var(--s) !important;
+  box-shadow: var(--sw-shadow-lg) !important;
+}
+
+body.modern-config .ui-tabs-panel fieldset,
+body.modern-config form.edituserprefsform fieldset,
+body.modern-config form.editsettingsform fieldset {
+  padding: 8px 4px 12px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body.modern-config .ui-tabs-panel label,
+body.modern-config form.edituserprefsform label,
+body.modern-config form.editsettingsform label {
+  color: var(--t) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+body.modern-config .ui-tabs-panel input[type="text"],
+body.modern-config .ui-tabs-panel input[type="password"],
+body.modern-config .ui-tabs-panel input[type="number"],
+body.modern-config .ui-tabs-panel select,
+body.modern-config .ui-tabs-panel textarea {
+  padding: 7px 10px !important;
+  border: 1px solid var(--b) !important;
+  border-radius: 9px !important;
+  background: var(--s2) !important;
+  color: var(--t) !important;
+  font-family: inherit !important;
+  font-size: 12.5px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme tweaks (colour tokens are swapped above)
+   -------------------------------------------------------------------------- */
+
+html[data-theme="dark"] div#toolbar { background: var(--bar); }
+html[data-theme="dark"] div#toolbar .toolbarButton p { background: var(--btn) !important; }
+html[data-theme="dark"] div#toolbar .toolbarButton p:hover { background: var(--btn-hover) !important; }
+
+html[data-theme="dark"] .spotCard { border-color: var(--b); }
+html[data-theme="dark"] .spotCard:hover { border-color: #3a4350; }
+html[data-theme="dark"] .spotCard .thumb { background: var(--thumb); }
+
+html[data-theme="dark"] div.announce {
+  background: rgba(16, 185, 129, .16) !important;
+  border-bottom-color: rgba(16, 185, 129, .3);
+  color: #6ee7b7 !important;
+}
+
+html[data-theme="dark"] div#filter ul.filterlist.maintenancebox li a.greyButton { background: var(--btn) !important; }
+
+/* the legacy skin re-styles the filter rows in dark mode; undo that */
+html[data-theme="dark"] div#filter ul.filterlist li a.filter,
+html[data-theme="dark"] div#filter ul.subfilterlist li a {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--t) !important;
+}
+
+html[data-theme="dark"] div#filter ul.filterlist li a.filter:hover {
+  background: var(--s2) !important;
+}
+
+html[data-theme="dark"] div#filter ul.filterlist li a.filter.selected {
+  background: var(--pill) !important;
+  color: var(--pill-fg) !important;
+}
+
+/* quick links need extra specificity: the legacy skin styles
+   `div#filter ul.filterlist li a.filter` for every list, quicklinks included */
+div#filter ul.filterlist.quicklinks li a.filter,
+div#filter ul.filterlist.quicklinks li a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 6px 9px !important;
+  box-sizing: border-box;
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: var(--t) !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  text-decoration: none !important;
+}
+
+html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a.filter,
+html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: var(--t) !important;
+}
+
+div#filter ul.filterlist.quicklinks li a.filter:hover,
+div#filter ul.filterlist.quicklinks li a:hover,
+html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a.filter:hover,
+html[data-theme="dark"] div#filter ul.filterlist.quicklinks li a:hover {
+  background: var(--s2) !important;
+  border-color: transparent !important;
+  color: var(--a) !important;
+}

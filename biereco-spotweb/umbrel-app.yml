@@ -5,7 +5,7 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.10.31"
+version: "2026.11.01"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: |-
@@ -35,15 +35,20 @@ description: |-
 
   The values are applied on start-up and only reapplied when you change them, so settings you edit later inside Spotweb are kept. Leave them empty to configure Spotweb itself instead; the default login is admin/admin.
 
+  **Theme**
+
+  The app ships with a modern light/dark theme that is enabled automatically. Use the theme button in the top bar to switch between light, dark and auto. To return to the stock Spotweb look, clear the *Custom CSS* field under Settings → Custom CSS.
+
 developer: Spotweb
 website: https://github.com/jgeusebroek/docker-spotweb
 submitter: biereco
 repo: https://github.com/jgeusebroek/docker-spotweb
 releaseNotes: >-
-  You can now configure your Usenet server and the Spotweb admin account from
-  Settings → App Settings → Environment variables, without opening the Spotweb
-  installer. The MariaDB data directory is now persisted correctly, so the
-  database survives app restarts and updates.
+  Adds a modern light/dark theme for Spotweb with a refreshed top bar, sidebar,
+  card grid, table view and spot detail page. Switch between light, dark and
+  auto with the button in the top bar. The theme is applied automatically and
+  is not affected by the 10 KB custom CSS limit, so you can still use the
+  Custom CSS field for your own tweaks.
 gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg

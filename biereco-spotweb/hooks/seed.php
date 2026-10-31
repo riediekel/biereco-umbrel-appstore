@@ -11,6 +11,7 @@
  *   3. upgrades the schema and default settings (same sequence as
  *      bin/upgrade-db.php)
  *   4. applies the optional SPOTWEB_NNTP_* and SPOTWEB_ADMIN_* values
+ *   5. enables the bundled Biereco theme through the customcss setting
  *
  * Everything is idempotent. NNTP/admin values are only applied when they
  * changed since the last run, so values edited inside Spotweb itself are not
@@ -276,6 +277,51 @@ function seed_apply_admin(Services_Settings_Container $settings, Dao_Factory $da
     return $state;
 }
 
+/**
+ * Points Spotweb's custom CSS setting at the theme stylesheet shipped in this
+ * app (mounted read-only as /var/www/spotweb/biereco-theme.css).
+ *
+ * Only a short `@import` line is stored, so the 10 KB limit of the customcss
+ * setting is never hit and the theme can be updated with the app.
+ *
+ * The value is written on the first run and refreshed on later runs only while
+ * it still matches what we wrote, so a user who edits or clears the field in
+ * Spotweb keeps their own value.
+ */
+function seed_apply_theme(Services_Settings_Container $settings, array $state): array
+{
+    $file = SEED_ROOT.'/biereco-theme.css';
+    if (!is_readable($file)) {
+        return $state;
+    }
+
+    $desired = '@import url("biereco-theme.css?v='.(string) @filemtime($file).'");';
+    $current = (string) $settings->get('customcss');
+
+    if ($current === $desired) {
+        $state['theme'] = $desired;
+
+        return $state;
+    }
+
+    $previous = array_key_exists('theme', $state) ? (string) $state['theme'] : null;
+    if ($previous === null) {
+        // Respect an existing custom stylesheet on the very first run.
+        if ($current !== '') {
+            return $state;
+        }
+    } elseif ($current !== $previous) {
+        // The field was edited in Spotweb after we wrote it; leave it alone.
+        return $state;
+    }
+
+    $settings->set('customcss', $desired);
+    $state['theme'] = $desired;
+    seed_log('Applied the Biereco theme stylesheet');
+
+    return $state;
+}
+
 function seed_run(): void
 {
     seed_write_db_settings();
@@ -315,6 +361,7 @@ function seed_run(): void
     $state = seed_read_state();
     $state = seed_apply_nntp_servers($settings, $state);
     $state = seed_apply_admin($settings, $daoFactory, $state);
+    $state = seed_apply_theme($settings, $state);
     seed_write_state($state);
 }
 

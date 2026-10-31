@@ -30,6 +30,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/app_data/config:/config
       - ${APP_DATA_DIR}/hooks/seed.php:/seed.php:ro
+      - ${APP_DATA_DIR}/hooks/theme.css:/var/www/spotweb/biereco-theme.css:ro
 
   spotweb_db:
     image: library/mariadb:13.0.2
