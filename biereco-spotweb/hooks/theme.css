@@ -519,7 +519,8 @@ div.spots { padding: 20px 22px 40px; }
   flex: 0 0 auto;
   padding: 3px 7px;
   border-radius: 6px;
-  background: var(--cb);
+  background-color: var(--cb) !important;
+  background-image: none !important;
   color: var(--cf);
   font-size: 10px;
   font-weight: 700;
@@ -673,7 +674,8 @@ table.spots td.category a {
   height: 18px;
   padding: 0 7px;
   border-radius: 6px;
-  background: var(--cb);
+  background-color: var(--cb) !important;
+  background-image: none !important;
   color: var(--cf) !important;
   font-size: 10px;
   font-weight: 700;
