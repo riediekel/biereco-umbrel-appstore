@@ -8,6 +8,9 @@ services:
 #    network_mode: host
     container_name: biereco_spotweb_1
     restart: unless-stopped
+    # Seed the Usenet server + admin credentials from the App Settings
+    # environment variables before starting the upstream entrypoint.
+    entrypoint: ["/bin/bash", "-c", "php /seed.php; exec /entrypoint.sh"]
     environment:
 #      - PUID=1030
 #      - GUID=100
@@ -20,11 +23,13 @@ services:
       - SPOTWEB_DB_PASS=spotweb
       - SPOTWEB_CRON_RETRIEVE=* */2 * * *
     depends_on:
-      - spotweb_db
+      spotweb_db:
+        condition: service_healthy
     ports:
       - 8083:80
     volumes:
       - ${APP_DATA_DIR}/data/app_data/config:/config
+      - ${APP_DATA_DIR}/hooks/seed.php:/seed.php:ro
 
   spotweb_db:
     image: library/mariadb:13.0.2
@@ -40,7 +45,13 @@ services:
       - MYSQL_DATABASE=spotweb
       - MYSQL_USER=spotweb
       - MYSQL_PASSWORD=spotweb
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
     volumes:
-      - ${APP_DATA_DIR}/data/db:/config
+      - ${APP_DATA_DIR}/data/db:/var/lib/mysql
 #    ports:
 #     - 3306:3306

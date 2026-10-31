@@ -5,7 +5,7 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.10.21"
+version: "2026.10.31"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: >-
@@ -24,17 +24,64 @@ description: >-
   Spot statistics on your system.
   Sabnzbd and nzbget(*) integration.
 
+  After installing you can set your Usenet server and Spotweb admin credentials under
+  Settings → App Settings → Environment variables, or leave them empty and configure
+  everything in Spotweb itself.
+
 developer: Spotweb
 website: https://github.com/jgeusebroek/docker-spotweb
 submitter: biereco
 repo: https://github.com/jgeusebroek/docker-spotweb
 releaseNotes: >-
-  This update moves to the latest image build (tag 20261021) and pins the MariaDB database to stable version 13.0.2 instead of `:latest`.
+  You can now configure your Usenet server and the Spotweb admin account from
+  Settings → App Settings → Environment variables, without opening the Spotweb
+  installer. The MariaDB data directory is now persisted correctly, so the
+  database survives app restarts and updates.
 #gallery:
 #  - 1.jpg
 #  - 2.jpg
 #  - 3.jpg
-defaultUsername: ""
-defaultPassword: ""
+environment:
+  - name: SPOTWEB_NNTP_HOST
+    services:
+      - spotweb
+    default: ""
+    note: Usenet server hostname, for example news.example.com. Leave empty to configure Spotweb in the web interface.
+  - name: SPOTWEB_NNTP_PORT
+    services:
+      - spotweb
+    default: "563"
+    note: Usenet server port. Common values are 563 (SSL/TLS) and 119 (plain or STARTTLS).
+  - name: SPOTWEB_NNTP_USER
+    services:
+      - spotweb
+    default: ""
+    note: Username for your Usenet account.
+  - name: SPOTWEB_NNTP_PASS
+    services:
+      - spotweb
+    default: ""
+    note: Password for your Usenet account. The value is stored in the app settings.
+  - name: SPOTWEB_NNTP_ENCRYPTION
+    services:
+      - spotweb
+    default: "ssl"
+    options:
+      - ssl
+      - starttls
+      - none
+    note: Connection encryption for the Usenet server.
+  - name: SPOTWEB_ADMIN_USER
+    services:
+      - spotweb
+    default: "admin"
+    note: Username for the Spotweb admin account. Leave empty to keep the current username.
+  - name: SPOTWEB_ADMIN_PASS
+    services:
+      - spotweb
+    default: ""
+    note: Password for the Spotweb admin account. Leave empty to keep the current password (admin/admin on a fresh install).
+defaultUsername: "admin"
+defaultPassword: "admin"
 dependencies: []
 path: ""
