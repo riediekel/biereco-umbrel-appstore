@@ -62,6 +62,46 @@ html[data-theme="dark"] {
 }
 
 html { background: var(--color-bg); }
+
+/* empty state / notices */
+.cardsEmptyState {
+  padding: 26px 28px;
+  border: 1px solid var(--b);
+  border-radius: var(--sw-radius);
+  background: var(--s);
+  box-shadow: var(--sw-shadow);
+}
+
+.cardsEmptyState h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  letter-spacing: -.01em;
+}
+
+.cardsEmptyState p {
+  margin: 0 0 16px;
+  color: var(--m);
+  font-size: 13px;
+}
+
+.cardsEmptyState .greyButton,
+.cardsNotice .greyButton {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: var(--a) !important;
+  background-image: none !important;
+  color: #fff !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.cardsEmptyState .greyButton:hover,
+.cardsNotice .greyButton:hover { filter: brightness(1.08); }
+
 body.fixed { padding-top: var(--sw-toolbar-h); }
 
 .spotcat0 { --cb: var(--c0); --cf: var(--c0t); }
