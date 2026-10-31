@@ -5,7 +5,7 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.11.01"
+version: "2026.11.02"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: |-
