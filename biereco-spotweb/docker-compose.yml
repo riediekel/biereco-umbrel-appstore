@@ -1,11 +1,10 @@
 services:
   app_proxy:
     environment:
-      APP_HOST: 10.21.0.1
+      APP_HOST: biereco_spotweb_1
       APP_PORT: 8083
   spotweb:
     image: jgeusebroek/spotweb:20261021
-    network_mode: host
     container_name: biereco_spotweb_1
     restart: unless-stopped
     # Seed the Usenet server + admin credentials from the App Settings
@@ -17,8 +16,8 @@ services:
 #      - GUID=100
       - TZ=Europe/Amsterdam
       - SPOTWEB_DB_TYPE=pdo_mysql
-      - SPOTWEB_DB_HOST=127.0.0.1
-      - SPOTWEB_DB_PORT=3307
+      - SPOTWEB_DB_HOST=spotweb_db
+      - SPOTWEB_DB_PORT=3306
       - WEBSERVER_PORT=8083
       - SPOTWEB_DB_NAME=spotweb
       - SPOTWEB_DB_USER=spotweb
@@ -26,6 +25,11 @@ services:
       - SPOTWEB_CRON_RETRIEVE=* */2 * * *
     depends_on:
       - spotweb_db
+    ports:
+      - 8083:8083
+    networks:
+      - default
+      - arrstack
     volumes:
       - ${APP_DATA_DIR}/data/app_data/config:/config
       # scripts + theme; copied into the docroot by entrypoint.sh
@@ -43,10 +47,19 @@ services:
       - MYSQL_DATABASE=spotweb
       - MYSQL_USER=spotweb
       - MYSQL_PASSWORD=spotweb
+    networks:
+      - default
     volumes:
       - ${APP_DATA_DIR}/data/db:/var/lib/mysql
-    ports:
-      - 127.0.0.1:3307:3306
 # No healthcheck on purpose: databases created by older versions of this app
 # have no `healthcheck` user, which makes healthcheck.sh report "unhealthy"
 # forever. The spotweb entrypoint already waits for the database itself.
+
+networks:
+  # Shared bridge network for the arr stack. Docker 27+ allocates the IPv6
+  # ULA automatically; on older daemons add an ipam.config with an IPv6 subnet.
+  # If the network already exists on the host, mark it external: true instead.
+  arrstack:
+    name: arrstack
+    driver: bridge
+    enable_ipv6: true

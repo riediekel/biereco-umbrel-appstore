@@ -5,7 +5,7 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.11.07"
+version: "2026.11.08"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: |-
@@ -44,12 +44,10 @@ website: https://github.com/jgeusebroek/docker-spotweb
 submitter: biereco
 repo: https://github.com/jgeusebroek/docker-spotweb
 releaseNotes: >-
-  Cleans up the container log: the theme and its templates are now copied into
-  the Spotweb docroot at start-up instead of being mounted read-only there, so
-  the upstream entrypoint no longer reports "Read-only file system" when it
-  fixes file ownership. Behaviour and data are unchanged. Also includes the
-  start-up fix for existing databases, the responsive theme, the mobile layout
-  and full-width login fields.
+  Runs Spotweb on the bridge network "arrstack" with IPv6 enabled instead of
+  the host network, so other containers can reach it by name again while it
+  keeps its own Apache port. Spotweb and its database talk over the Docker
+  network instead of host ports.
 gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg
