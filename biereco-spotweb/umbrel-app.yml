@@ -5,7 +5,7 @@ storage:
 name: Spotweb
 tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
 category: media
-version: "2026.11.08"
+version: "2026.11.09"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
 port: 8083
 description: |-
@@ -44,10 +44,10 @@ website: https://github.com/jgeusebroek/docker-spotweb
 submitter: biereco
 repo: https://github.com/jgeusebroek/docker-spotweb
 releaseNotes: >-
-  Runs Spotweb on the bridge network "arrstack" with IPv6 enabled instead of
-  the host network, so other containers can reach it by name again while it
-  keeps its own Apache port. Spotweb and its database talk over the Docker
-  network instead of host ports.
+  Joins Umbrel's shared umbrel_main_network explicitly again, next to the
+  bridge network "arrstack" with IPv6. Other Umbrel apps can reach Spotweb by
+  container name on the shared network, while the arr stack keeps talking over
+  arrstack.
 gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg

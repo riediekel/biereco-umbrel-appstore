@@ -56,6 +56,11 @@ services:
 # forever. The spotweb entrypoint already waits for the database itself.
 
 networks:
+  # Umbrel's shared network. Declared explicitly because the top-level networks
+  # block below stops umbrelOS from injecting it as the default network.
+  default:
+    name: umbrel_main_network
+    external: true
   # Shared bridge network for the arr stack. Docker 27+ allocates the IPv6
   # ULA automatically; on older daemons add an ipam.config with an IPv6 subnet.
   # If the network already exists on the host, mark it external: true instead.
