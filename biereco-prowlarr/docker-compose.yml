@@ -30,6 +30,11 @@ services:
       - arrstack
 
 networks:
+  # Umbrel's shared network. Declared explicitly because the top-level networks
+  # block below stops umbrelOS from injecting it as the default network.
+  default:
+    name: umbrel_main_network
+    external: true
   # Created once on the host (spotweb creates it), so every arr app shares it.
   # On a fresh device: docker network create --ipv6 arrstack
   arrstack:
