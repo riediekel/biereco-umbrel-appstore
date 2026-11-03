@@ -1,0 +1,36 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: biereco_prowlarr_server_1
+      APP_PORT: 9696
+      PROXY_AUTH_WHITELIST: "/api/*"
+
+  server:
+    image: linuxserver/prowlarr:version-2.7.0.5723@sha256:04be30163fbaf48d6aeee7b5893c9f6614ffbad6d853971df0d6dcdf01c7f104
+    container_name: biereco_prowlarr_server_1
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    networks:
+      - default
+      - arrstack
+    restart: unless-stopped
+
+  # FlareSolverr sidecar for indexers that need it. Point Prowlarr's
+  # FlareSolverr setting at http://biereco_prowlarr_indexer_proxy_1:8191.
+  indexer_proxy:
+    image: flaresolverr/flaresolverr:v3.4.6@sha256:7962759d99d7e125e108e0f5e7f3cdbcd36161776d058d1d9b7153b92ef1af9e
+    container_name: biereco_prowlarr_indexer_proxy_1
+    restart: unless-stopped
+    networks:
+      - arrstack
+
+networks:
+  # Created once on the host (spotweb creates it), so every arr app shares it.
+  # On a fresh device: docker network create --ipv6 arrstack
+  arrstack:
+    external: true

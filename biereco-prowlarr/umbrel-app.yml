@@ -1,0 +1,51 @@
+manifestVersion: 1
+id: biereco-prowlarr
+storage:
+  dataRoot: data
+category: media
+name: Prowlarr
+version: "2.7.0.5723"
+tagline: Prowlarr is an indexer manager/proxy
+description: >-
+  Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs base stack to integrate with your various PVR apps.
+  Prowlarr supports management of both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Lidarr, Mylar3, Radarr, Readarr, and Sonarr offering complete management of your indexers with no per app Indexer setup required (we do it all).
+
+
+  This build runs on the shared Docker network `arrstack`, so other apps in this store can reach it at `http://biereco_prowlarr_server_1:9696`.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  1. Open Prowlarr and add your indexers.
+
+
+  2. Connect it to Radarr, Sonarr, Lidarr or Readarr under Settings → Apps, using the container name of that app on the `arrstack` network.
+
+
+  3. FlareSolverr is included as a sidecar. To use it, set FlareSolverr to `http://biereco_prowlarr_indexer_proxy_1:8191` under Settings → Indexers, then add the `flaresolverr` tag to the indexers that need it.
+developer: Prowlarr
+website: https://prowlarr.com/
+dependencies: []
+repo: https://github.com/Prowlarr/Prowlarr
+support: https://github.com/Prowlarr/Prowlarr/issues
+port: 9696
+gallery:
+  - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/master/prowlarr/1.jpg
+  - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/master/prowlarr/2.jpg
+  - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/master/prowlarr/3.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
+releaseNotes: >-
+  Rebuilt on the official Umbrel package: Prowlarr 2.7.0.5723 from the pinned
+  linuxserver image, behind the Umbrel app proxy, with a FlareSolverr sidecar.
+  The app now runs on the shared bridge network "arrstack" with IPv6, so other
+  arr apps can reach it by container name instead of a host port.
+
+
+  The network must exist on the device; spotweb creates it, or run
+  `docker network create --ipv6 arrstack` once on a fresh install.
+submitter: biereco
