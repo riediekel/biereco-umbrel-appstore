@@ -5,6 +5,7 @@ storage:
 category: media
 name: Prowlarr
 version: "2.7.0.5723"
+icon: https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-prowlarr/icon.png
 tagline: Prowlarr is an indexer manager/proxy
 description: >-
   Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs base stack to integrate with your various PVR apps.
