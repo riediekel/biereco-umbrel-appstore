@@ -1,0 +1,35 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: biereco_strata_1
+      APP_PORT: 8080
+  strata:
+    image: ghcr.io/niko1221/strata:0.2.9-cuda13
+    container_name: biereco_strata_1
+    restart: unless-stopped
+    environment:
+      MODEL: ${MODEL:-}
+      CONTEXT: ${CONTEXT:-32k}
+      PARALLEL: ${PARALLEL:-}
+      VISION: ${VISION:-off}
+      TUNE: ${TUNE:-skip}
+      GPUS: ${GPUS:-}
+      STRATA_MEMORY_LIMIT_MIB: ${STRATA_MEMORY_LIMIT_MIB:-0}
+      API_KEY: ${APP_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    ports:
+      - 8092:8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    shm_size: 2gb
+    stop_grace_period: 2m
