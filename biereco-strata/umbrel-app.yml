@@ -5,7 +5,7 @@ storage:
 name: Strata
 tagline: Run a local LLM server on your own GPU, with an OpenAI and Anthropic compatible API.
 category: ai
-version: "0.2.11"
+version: "0.2.12"
 icon: https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/icon.png
 port: 8091
 description: |-
@@ -55,12 +55,12 @@ gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/2.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/3.jpg
 releaseNotes: >-
-  The Strata web page on port 8091 no longer asks for the API key: a small
-  proxy adds it for the page. The direct API on port 8092 keeps using the key,
-  so external clients are unchanged. Includes Strata 0.2.9: Unsloth's 1-bit
-  DeepSeek sets, faster prompts on Strix Halo, faster parallel requests on
-  Linux NVIDIA cards, and fixes from user reports. This app runs the cuda13
-  container image for NVIDIA RTX cards.
+  Updates the container image to Strata 0.2.11 for NVIDIA RTX cards (cuda13).
+  This brings faster prompts on NVIDIA and Radeon cards, chats saved as files
+  in the data folder instead of browser storage, a fix for mixed-up replies
+  from model copies, more reliable small multi-GPU splits, and many GUI,
+  Terminal and tool-call fixes. The keyless web page on 8091 and the
+  key-protected API on 8092 are unchanged.
 environment:
   - name: MODEL
     services:
