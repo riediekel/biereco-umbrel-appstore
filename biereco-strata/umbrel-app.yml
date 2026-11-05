@@ -5,7 +5,7 @@ storage:
 name: Strata
 tagline: Run a local LLM server on your own GPU, with an OpenAI and Anthropic compatible API.
 category: ai
-version: "0.2.10"
+version: "0.2.11"
 icon: https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/icon.png
 port: 8091
 description: |-
@@ -16,6 +16,7 @@ description: |-
   - OpenAI-compatible API at `/v1` and Anthropic-compatible API for apps such as Claude Code.
   - Chat and tool calling.
   - Automatic model choice for your card, or pick a model size yourself.
+  - The Strata web page on `8091` opens without asking for the API key. Turn on Umbrel's app login for this app if other people can reach your network.
   - A key-protected API. The key is your Umbrel app password.
   - The API is also reachable directly on the host at port `8092`, next to the Umbrel app URL on `8091`, using the same key. This is the address to give external clients.
 
@@ -31,8 +32,8 @@ description: |-
   **After installing**
 
   1. Wait for the first start to finish. The download and setup can take a long time. Open the app logs to follow progress.
-  2. Open Strata and use the API key (your app password) to connect.
-  3. Point your apps at the API address and use the key as the API key.
+  2. Open Strata. The web page connects by itself; you do not enter the key there.
+  3. Point your apps at the API address and use the key (your app password) as the API key.
 
   **Settings**
 
@@ -54,9 +55,9 @@ gallery:
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/2.jpg
   - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-strata/3.jpg
 releaseNotes: >-
-  Exposes Strata's API directly on the host at port 8092, next to the Umbrel
-  app URL on 8091, so external clients can connect with the API key without
-  going through Umbrel's login. Also includes Strata 0.2.9: Unsloth's 1-bit
+  The Strata web page on port 8091 no longer asks for the API key: a small
+  proxy adds it for the page. The direct API on port 8092 keeps using the key,
+  so external clients are unchanged. Includes Strata 0.2.9: Unsloth's 1-bit
   DeepSeek sets, faster prompts on Strix Halo, faster parallel requests on
   Linux NVIDIA cards, and fixes from user reports. This app runs the cuda13
   container image for NVIDIA RTX cards.

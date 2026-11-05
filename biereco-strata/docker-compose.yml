@@ -1,8 +1,41 @@
 services:
   app_proxy:
     environment:
-      APP_HOST: biereco_strata_1
+      APP_HOST: biereco_strata_web_1
       APP_PORT: 8080
+  web:
+    image: nginx:1.29-alpine
+    container_name: biereco_strata_web_1
+    restart: unless-stopped
+    depends_on:
+      - strata
+    # The Strata page is served through this small proxy, which adds the API key
+    # for requests coming from the page. That way the Strata web interface opens
+    # without asking for the key, while port 8092 keeps requiring it for external
+    # clients.
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        set -e
+        cat > /etc/nginx/conf.d/default.conf <<'EOF'
+        server {
+            listen 8080;
+            server_name _;
+
+            proxy_http_version 1.1;
+            proxy_buffering off;
+            proxy_read_timeout 3600s;
+            proxy_send_timeout 3600s;
+            client_max_body_size 0;
+
+            location / {
+                proxy_set_header Authorization "Bearer ${APP_PASSWORD}";
+                proxy_pass http://biereco_strata_1:8080;
+            }
+        }
+        EOF
+        exec nginx -g 'daemon off;'
   strata:
     image: ghcr.io/niko1221/strata:0.2.9-cuda13
     container_name: biereco_strata_1
