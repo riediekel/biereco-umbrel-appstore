@@ -4,7 +4,7 @@ services:
       APP_HOST: biereco_spotweb_1
       APP_PORT: 8083
   spotweb:
-    image: jgeusebroek/spotweb:20261021
+    image: jgeusebroek/spotweb:20261107
     container_name: biereco_spotweb_1
     restart: unless-stopped
     # Seed the Usenet server + admin credentials from the App Settings
