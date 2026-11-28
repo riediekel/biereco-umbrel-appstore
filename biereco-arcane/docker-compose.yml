@@ -1,0 +1,27 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: arcane_arcane_1
+      APP_PORT: 3552
+
+  arcane:
+    image: ghcr.io/getarcaneapp/manager:v3.2.0
+    restart: on-failure
+    privileged: true
+    network_mode: host
+    environment:
+      ARCANE_APP_URL: http://${DEVICE_DOMAIN_NAME}:3552
+      # Arcane 3 drops to the built-in 65532 user (or PUID when set) instead of
+      # running as root like 2.x did. Existing project folders are root-owned,
+      # so keep the manager on root to stay compatible with them.
+      PUID: 0
+      PGID: 0
+      ARCANE_ENCRYPTION_KEY: 3a44fb4bed557445732f17cb23ca7b3475f6aaaf9290be735af0b6adbe2ea4b7
+      ARCANE_DATABASE_URL: file:data/arcane.db?_pragma=journal_mode(WAL)&_pragma=busy_timeout(2500)&_txlock=immediate
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${APP_DATA_DIR}/data/app_data:/app/data
+      - ${APP_DATA_DIR}/data/projects:/app/data/projects
+#      - ${APP_DATA_DIR}/data/docker:/var/run
+# Arcane Docker Compose Configuration
+# Generated at 11/09/2025, 17:38:36

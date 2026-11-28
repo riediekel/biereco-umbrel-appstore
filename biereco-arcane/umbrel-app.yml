@@ -1,0 +1,70 @@
+manifestVersion: 1.1
+id: biereco-arcane
+icon: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/arcane.png
+category: developer
+name: Arcane
+version: "3.2.0"
+tagline: An easy and modern Docker management platform
+description: >-
+  ⚠️ Make sure to only use named Docker volumes for your containers and projects. Data in bind-mounted volumes will be lost when the Arcane app is restarted or updated.
+
+  Arcane is a powerful and modern container management platform designed to simplify the way developers interact with Docker environments. It provides a seamless and visually appealing interface that brings all aspects of container management together in one place. Users can create, start, stop, and inspect containers, explore networks, manage images, and handle volumes with precision and control.
+
+  Beyond basic management, Arcane enhances productivity by offering integrated tools that developers typically rely on during their daily workflows. Its built-in terminal allows direct interaction with running containers, while the embedded code editor enables quick configuration or script adjustments without switching to external applications. Real-time system insights and detailed logging give users a clear view of their infrastructure's performance and resource usage.
+
+  The platform is designed to bridge the gap between simplicity and advanced control. It combines a clean, modern design with powerful backend capabilities, making it equally suitable for developers experimenting locally and professionals managing larger setups. With Arcane, managing containers feels more like using a well-crafted development environment than an administrative dashboard, allowing users to focus on building and running applications instead of dealing with complex Docker commands.
+
+  🧩 Arcane on Umbrel is designed for advanced users who want complete control over their containers. Follow these recommendations to ensure a reliable and stable experience.  
+
+  1. Persistent data: Always use named Docker volumes for your containers and projects. Any data stored in bind mounts will be lost when the Arcane app is updated or restarted.  
+
+  2. Port usage: Be mindful of port conflicts between your containers, Umbrel system services, and other installed or future apps. Assign unique port numbers to prevent conflicts.  
+
+  3. Restart behavior: Configure your containers with the restart policy set to unless stopped or always. This ensures they automatically restart after Arcane restarts or updates.  
+
+  4. Web access: You can access any container that exposes a web interface at `umbrel.local:PORT_NUMBER`. For example, if your app runs on port 5050, open `http://umbrel.local:5050` in your browser.
+
+  ⚠️ Watch out for port conflicts between your custom Docker containers and your umbrelOS apps.
+website: https://getarcane.app/
+dependencies: []
+repo: https://github.com/getarcaneapp/arcane
+support: https://github.com/getarcaneapp/arcane/issues
+port: 3552
+gallery:
+  - https://getumbrel.github.io/umbrel-apps-gallery/arcane/1.jpg
+  - https://getumbrel.github.io/umbrel-apps-gallery/arcane/2.jpg
+  - https://getumbrel.github.io/umbrel-apps-gallery/arcane/3.jpg
+  - https://getumbrel.github.io/umbrel-apps-gallery/arcane/4.jpg
+  - https://getumbrel.github.io/umbrel-apps-gallery/arcane/5.jpg
+path: ""
+defaultUsername: "arcane"
+defaultPassword: "arcane-admin"
+releaseNotes: >-
+  Arcane 3.2.0 voegt project- en systeembackups toe (inclusief volumes),
+  groeps-RBAC met per-bron-rechten en een opt-in modus voor auto-update en
+  auto-heal. Ook bugfixes bij image-updates, GitOps-sync en
+  permissiecontroles, en betere prestaties bij image-scans en paginaladingen.
+  De manager houdt PUID/PGID op 0 voor compatibiliteit met projectmappen van 2.x.
+
+  Arcane 3.1.0 is a major upgrade. The app now runs the renamed
+  ghcr.io/getarcaneapp/manager image, every Arcane variable uses the ARCANE_
+  prefix, and JWT_SECRET is gone.
+
+
+  Back up the app data before updating. Because this device already ran 2.17.3,
+  the database upgrade can proceed. Existing logins and projects migrate on
+  startup, but notifications must be set up again under System -> Notifications,
+  custom roles and API keys should be reviewed, and scripts using
+  /api/environments must switch to /api/agents.
+
+
+  Highlights: LDAP login with user sync, project copy and move between
+  environments, and an adjustable background image blur.
+
+
+  Full release notes can be found at https://github.com/getarcaneapp/arcane/releases/tag/v3.1.0
+permissions:
+  - GPU
+developer: Arcane
+submitter: biereco
+submission: https://github.com/getumbrel/umbrel-apps/pull/4017

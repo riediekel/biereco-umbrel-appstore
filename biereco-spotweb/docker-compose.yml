@@ -1,0 +1,71 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: biereco_spotweb_1
+      APP_PORT: 8083
+  spotweb:
+    image: jgeusebroek/spotweb:20261122
+#    network_mode: host
+    container_name: biereco_spotweb_1
+    restart: unless-stopped
+    # Seed the Usenet server + admin credentials from the App Settings
+    # environment variables and copy the theme into the docroot before
+    # starting the upstream entrypoint.
+    entrypoint: ["/bin/bash", "/biereco-hooks/entrypoint.sh"]
+    environment:
+#      - PUID=1030
+#      - GUID=100
+      - TZ=Europe/Amsterdam
+      - SPOTWEB_DB_TYPE=pdo_mysql
+      - SPOTWEB_DB_HOST=spotweb_db
+      - SPOTWEB_DB_PORT=3306
+      - SPOTWEB_DB_NAME=spotweb
+      - SPOTWEB_DB_USER=spotweb
+      - SPOTWEB_DB_PASS=spotweb
+      - SPOTWEB_CRON_RETRIEVE=* */2 * * *
+    depends_on:
+      - spotweb_db
+    ports:
+      - 8083:80
+    networks:
+      - default
+      - arrstack
+    volumes:
+      - ${APP_DATA_DIR}/data/app_data/config:/config
+      # scripts + theme; copied into the docroot by entrypoint.sh
+      - ${APP_DATA_DIR}/hooks:/biereco-hooks:ro
+
+  spotweb_db:
+    image: library/mariadb:13.0.2
+    container_name: spotweb_db
+    restart: unless-stopped
+    networks:
+      - default
+    environment:
+      - PUID=1030
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=spotweb
+      - TZ=Europe/Amsterdam
+      - MYSQL_DATABASE=spotweb
+      - MYSQL_USER=spotweb
+      - MYSQL_PASSWORD=spotweb
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/var/lib/mysql
+#    ports:
+#     - 3306:3306
+# No healthcheck on purpose: databases created by older versions of this app
+# have no `healthcheck` user, which makes healthcheck.sh report "unhealthy"
+# forever. The spotweb entrypoint already waits for the database itself.
+networks:
+  # Umbrel's shared network. Declared explicitly because the top-level networks
+  # block below stops umbrelOS from injecting it as the default network.
+  default:
+    name: umbrel_main_network
+    external: true
+  # Shared bridge network for the arr stack. Docker 27+ allocates the IPv6
+  # ULA automatically; on older daemons add an ipam.config with an IPv6 subnet.
+  # If the network already exists on the host, mark it external: true instead.
+  arrstack:
+    name: arrstack
+    driver: bridge
+    enable_ipv6: true

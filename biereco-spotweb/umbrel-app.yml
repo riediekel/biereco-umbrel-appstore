@@ -1,0 +1,96 @@
+manifestVersion: 1
+id: biereco-spotweb
+storage:
+  dataRoot: data
+name: Spotweb
+tagline: Spotweb is a decentralized usenet community based on the Spotnet protocol.
+category: media
+version: "2026.11.22"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotnet.png
+port: 8083
+description: |-
+  ?? Spotweb is one of the most-featured Spotnet clients currently available, featuring among other things:
+  Fast.
+  Customizable filter system from within the system.
+  Posting of comments and spots.
+  Showing and filtering on new spots since the last view.
+  Watchlist.
+  Easy to download multiple files.
+  Rating of spots.
+  Both central as user-specific blacklist support built-in.
+  Spam reporting.
+  Easy layout customization by providing custom CSS.
+  Growl/Notify My Android/Notify/Prowl and Twitter integration. (*)
+  Spot statistics on your system.
+  Sabnzbd and nzbget(*) integration.
+
+  There is no configuration step while installing: Spotweb installs with its defaults and you set everything up afterwards.
+
+  **Setup after installing**
+
+  1. Open **Settings ? App Settings ? Environment variables**.
+  2. Fill in your Usenet server: `SPOTWEB_NNTP_HOST`, `SPOTWEB_NNTP_PORT` (563 for SSL/TLS, 119 for plain or STARTTLS), `SPOTWEB_NNTP_USER`, `SPOTWEB_NNTP_PASS` and `SPOTWEB_NNTP_ENCRYPTION`.
+  3. Optionally set `SPOTWEB_ADMIN_USER` and `SPOTWEB_ADMIN_PASS` to choose the Spotweb administrator login.
+  4. Save and wait for the app to restart (about 30 seconds), then open Spotweb and log in.
+
+  The values are applied on start-up and only reapplied when you change them, so settings you edit later inside Spotweb are kept. Leave them empty to configure Spotweb itself instead; the default login is admin/admin.
+
+  **Theme**
+
+  The app ships with a modern light/dark theme that is enabled automatically. Use the theme button in the top bar to switch between light, dark and auto. The layout adapts to smaller screens for tablets and narrow windows, and phones get a matching mobile layout. To return to the stock Spotweb look, clear the *Custom CSS* field under Settings ? Custom CSS.
+
+developer: Spotweb
+website: https://github.com/jgeusebroek/docker-spotweb
+submitter: biereco
+repo: https://github.com/jgeusebroek/docker-spotweb
+releaseNotes: >-
+  Updates the Spotweb container to the weekly build of 22 November 2026. The
+  Umbrel theme, mobile layout and start-up fixes are unchanged.
+gallery:
+  - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/1.jpg
+  - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/2.jpg
+  - https://raw.githubusercontent.com/riediekel/biereco-umbrel-appstore/master/biereco-spotweb/3.jpg
+environment:
+  - name: SPOTWEB_NNTP_HOST
+    services:
+      - spotweb
+    default: ""
+    note: Usenet server hostname, for example news.example.com. Leave empty to configure Spotweb in the web interface.
+  - name: SPOTWEB_NNTP_PORT
+    services:
+      - spotweb
+    default: "563"
+    note: Usenet server port. Common values are 563 (SSL/TLS) and 119 (plain or STARTTLS).
+  - name: SPOTWEB_NNTP_USER
+    services:
+      - spotweb
+    default: ""
+    note: Username for your Usenet account.
+  - name: SPOTWEB_NNTP_PASS
+    services:
+      - spotweb
+    default: ""
+    note: Password for your Usenet account. The value is stored in the app settings.
+  - name: SPOTWEB_NNTP_ENCRYPTION
+    services:
+      - spotweb
+    default: "ssl"
+    options:
+      - ssl
+      - starttls
+      - none
+    note: Connection encryption for the Usenet server.
+  - name: SPOTWEB_ADMIN_USER
+    services:
+      - spotweb
+    default: "admin"
+    note: Username for the Spotweb admin account. Leave empty to keep the current username.
+  - name: SPOTWEB_ADMIN_PASS
+    services:
+      - spotweb
+    default: ""
+    note: Password for the Spotweb admin account. Leave empty to keep the current password (admin/admin on a fresh install).
+defaultUsername: "admin"
+defaultPassword: "admin"
+dependencies: []
+path: ""
